@@ -11,7 +11,7 @@ class Bank:
         for i in range(100):
             r = randint(50, 500)
             self.balance += r
-            if (self.balance >= 500 and self.lock == self.lock.locked()):
+            if (self.balance >= 500 and self.lock.locked()):
                 self.lock.release()
             print(f'Пополнение: {r}. Баланс: {self.balance}')
             sleep(0.001)
@@ -20,13 +20,14 @@ class Bank:
     def take(self):
         for i in range(100):
             r = randint(50, 500)
+            print(f'Запрос на: {r}')
             if (r<=self.balance):
                 self.balance -= r
                 print(f'Снятие: {r}. Баланс: {self.balance}')
             else:
                 print("Запрос отклонён, недостаточно средств")
                 self.lock.acquire()
-
+            sleep(0.001)
 
 bk = Bank()
 
